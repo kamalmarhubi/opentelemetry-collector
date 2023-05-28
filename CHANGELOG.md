@@ -2,7 +2,8 @@
 
 # Changelog
 
-<!-- next version -->
+### 💡 Enhancements 💡
+- `ocb`: Add an `imports` config that allows a collector build to import additional packages for their `init` side effects
 
 ## v0.78.2
 

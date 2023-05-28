@@ -33,6 +33,7 @@ type Config struct {
 	Receivers    []Module     `mapstructure:"receivers"`
 	Processors   []Module     `mapstructure:"processors"`
 	Connectors   []Module     `mapstructure:"connectors"`
+	Imports      []Module     `mapstructure:"imports"`
 	Replaces     []string     `mapstructure:"replaces"`
 	Excludes     []string     `mapstructure:"excludes"`
 }
@@ -88,6 +89,7 @@ func (c *Config) Validate() error {
 		validateModules(c.Exporters),
 		validateModules(c.Processors),
 		validateModules(c.Connectors),
+		validateModules(c.Imports),
 	)
 }
 
@@ -132,6 +134,11 @@ func (c *Config) ParseModules() error {
 	}
 
 	c.Connectors, err = parseModules(c.Connectors)
+	if err != nil {
+		return err
+	}
+
+	c.Imports, err = parseModules(c.Imports)
 	if err != nil {
 		return err
 	}
